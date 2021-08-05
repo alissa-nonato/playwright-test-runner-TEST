@@ -8,3 +8,6 @@ This will add the `node_modules` folder to your directory.
 
 ### Step 2
 Run `npm test` in your local repository.
+
+### Step 3
+Remember to comment out `test.skip()` on certain tests if you want to see them run! :)
