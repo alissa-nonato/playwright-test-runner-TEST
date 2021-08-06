@@ -4,10 +4,14 @@ import { devices } from 'playwright';
 const config: PlaywrightTestConfig = {
     testDir: 'tests',                       // Look for test files in the "tests" directory, relative to this configuration file
     outputDir: 'test-results',              // Output directory for files created during the test run
-    timeout: 30000,                         // Each test is given 30 seconds  
+    timeout: 20000,                         // Each test is given 20 seconds  
     forbidOnly: !!process.env.CI,           // Forbid test.only on CI  
     retries: 2,                             // 2 retries for each test
-    workers: process.env.CI ? 2 : 5,        // Limit the number of workers on CI, use default locally
+    workers: 2,                             // Limit the number of workers (browsers/projects) that run at a time
+    updateSnapshots: 'missing',             // For visual comparisons: whether to update expected snapshots with the actual results produced by the test run
+    expect: {
+        toMatchSnapshot: { threshold: 1 },  // Matching threshold, ranges from 0 to 1. Smaller values make the comparison more sensitive.
+    },
     use: {
         headless: false,
         ignoreHTTPSErrors: true,
@@ -19,8 +23,7 @@ const config: PlaywrightTestConfig = {
         },
     },
     reporter: [
-        ['list'],  
-        //['json', {  outputFile: 'test-results/test-results.json' }]
+        ['list']
     ],
     projects: [
         {
@@ -46,23 +49,22 @@ const config: PlaywrightTestConfig = {
                 },     
             },
         },
-        // {
-        //     name: 'WebKit',
-        //     use: { browserName: 'webkit' },
-        // },
-
-                // "Pixel 4" tests use WebKit browser.
-        // {
-        //     name: 'Pixel 4',
-        //     use: {
-        //         browserName: 'webkit',
-        //         contextOptions: {
-        //             viewport: devices['Pixel 4'].viewport,
-        //             userAgent: devices['Pixel 4'].userAgent,
-        //             isMobile: devices['Pixel 4'].isMobile
-        //         },   
-        //     },
-        // },
+        {
+            name: 'WebKit',
+            use: { browserName: 'webkit' },
+        },
+        // "Pixel 4" tests use Chromium browser.
+        {
+            name: 'Pixel 4',
+            use: {
+                browserName: 'chromium',
+                contextOptions: {
+                    viewport: devices['Pixel 4'].viewport,
+                    userAgent: devices['Pixel 4'].userAgent,
+                    isMobile: devices['Pixel 4'].isMobile
+                },   
+            },
+        },
     ]
 };
 export default config;

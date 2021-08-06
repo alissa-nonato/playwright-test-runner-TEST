@@ -1,6 +1,6 @@
 import { BrowserContextOptions } from '@playwright/test';
 import type { Page, ViewportSize } from 'playwright';
-import { Coordinates } from '../support/types';
+import { Coordinates, PlayingFrom } from '../support/types';
 import { Login } from './login.class';
 import { getObjPosition } from '../support/functions/functions_objects';
 import { AUTOMATION_OBJS, COORD_OFFSET } from '../support/const_objects';
@@ -22,24 +22,22 @@ export class Shiverchill {
         this.login = new Login(page, url, user, pass, contextOptions, viewport);
     }
 
-    async goToShiverchillFromHome () {
+    async goToShiverchill (playingFrom: PlayingFrom) {
         await this.login.initialLogin();
-        await this.login.playFromHome();
-        await this.goToShiverchill(); 
+
+        playingFrom === 'home' ? await this.login.playFromHome() : await this.login.playFromSchool();
+
+        await this.shiverchillSteps(); 
 
         // click close button on Membership pop-up if it appears
         // only appears after school hours when playing from home
-        await closeMemPopupIfVisible(this.login.page, this.login.scale);   
-    }
-
-    async goToShiverchillFromSchool () {
-        await this.login.initialLogin();
-        await this.login.playFromSchool();
-        await this.goToShiverchill(); 
+        if (playingFrom === 'home') {
+            await closeMemPopupIfVisible(this.login.page, this.login.scale);
+        }    
     }
 
     // common steps for both home and school
-    private async goToShiverchill() {
+    private async shiverchillSteps() {
         // click world map btn
         const worldMapBtn: Coordinates = await getObjPosition(this.login.page, 'name', AUTOMATION_OBJS.WORLD_MAP_BTN, 'worldPosition');
         await this.login.page.mouse.click(

@@ -7,8 +7,9 @@ import { Login } from '../classes/login.class';
 test.use({baseURL: URL.PRODIGY_FEATURE_BRANCH});
 
 test.describe('Log in from home', () => {
+    test.skip();
     test('should log in', async ({page, baseURL, user, pass, contextOptions, viewport}) => {
-        test.skip();
+        //test.skip();
         test.slow();
         
         const login = new Login(page, baseURL, user, pass, contextOptions, viewport);
@@ -20,7 +21,7 @@ test.describe('Log in from home', () => {
 
 
     test('should enter the game from home', async ({page, contextOptions, baseURL, user, pass, viewport}) => {
-        test.skip();
+        //test.skip();
         test.slow();
 
         const login = new Login(page, baseURL, user, pass, contextOptions, viewport);

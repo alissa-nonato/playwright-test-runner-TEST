@@ -23,4 +23,4 @@ export const test = base.extend<LoginFixture>({
 });
 
 export const expect = base.expect;
-export const describe = base.describe;
+export const describe = base.describe;  // can use this instead of test.describe if desired

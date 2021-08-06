@@ -3,6 +3,8 @@ export type Coordinates = {
   y: number;
 };
 
+export type PlayingFrom = 'home' | 'school';
+
 export type ObjProperty = 'key' | 'name' | 'text' | 'frame';
 
 export type IsVisibleProperty = 'visible' | 'worldVisible' | 

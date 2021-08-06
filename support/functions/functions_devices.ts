@@ -29,15 +29,16 @@ export async function getWinScale (
         scaleX: 1,
         scaleY: 1
     };
-
 }
 
 export async function isLowEndDevice (
     contextOptions: BrowserContextOptions
 ): Promise<boolean> {
     let lowEndDeviceFound: boolean = false;
-        for (const [key, value] of Object.entries(LOW_END_USER_AGENTS)) {
-            if(contextOptions.isMobile && contextOptions.userAgent === value 
+        // Galaxy Tab S4 is a weird case where it's a mobile device but the low end device pop-up
+        // doesn't trigger when using a low end user agent
+        for (const property in LOW_END_USER_AGENTS) {
+            if(contextOptions.isMobile && contextOptions.userAgent === LOW_END_USER_AGENTS[property] 
                 && (contextOptions.viewport !== devices['Galaxy Tab S4'].viewport 
                 && contextOptions.viewport !== devices['Galaxy Tab S4 landscape'].viewport)) {
                 lowEndDeviceFound = true;

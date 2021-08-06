@@ -5,7 +5,11 @@
   "main": "",
   "scripts": {
     "test": "playwright test",
-    "allBrowsers": "playwright test --browser=all"
+    "iphone6": "playwright test --project='iphone 6'",
+    "chromium": "playwright test --project=chromium",
+    "webkit": "playwright test --project=webkit",
+    "pixel4":"playwright test --project='pixel 4'",
+    "allbrowsers": "playwright test --browser=all"
   },
   "keywords": [],
   "author": "",

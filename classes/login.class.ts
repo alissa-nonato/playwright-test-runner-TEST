@@ -33,8 +33,6 @@ export class Login {
 
     async initialLogin() {
         this.scale = await getWinScale(this.viewport, this.contextOptions);
-        console.log(this.viewport);
-        console.log(this.contextOptions);
         
         await this.page.goto(this.url);
         

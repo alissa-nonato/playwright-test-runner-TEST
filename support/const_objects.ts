@@ -44,10 +44,24 @@ export const RESPONSE_URL = {
     MORE_WORLDS_BTN: 'more worlds',
     WORLD_AIRMELD_TXT: 'Airmeld',
     WORLD_MAP_BTN: 'world-map',
+    BACKPACK_BTN: 'items',
     SHIVERCHILL_GRAPHIC: 'btn-shiverchill',
     PVE_PLAY_BTN: 'playButton',
     MEM_CLOSE_BTN: 'closeButton',
     NPC_BOK: 'Bok'
+  };
+
+  // only have backpack categories here
+  export const BACKPACK_CATEGORIES = {
+    HATS: 'Hats',
+    OUTFITS: 'Outfits',
+    WANDS: 'Wands',
+    RELICS: 'Relics',
+    BOOTS: 'Boots',
+    BUDDIES: 'Buddies',
+    ITEMS: 'Items',
+    CURRENCY: 'Currency',
+    MOUNTS: 'Mounts'
   };
   
   // low end devices based on userAgent property of device
