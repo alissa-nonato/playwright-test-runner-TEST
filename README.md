@@ -16,7 +16,7 @@ Run any of the following in your local repository:
 * `npm run pixel4` to only run the `iPhone 6` project
 * `npm run allbrowsers` to run the tests in `Chromium, WebKit, and Firefox` in parallel
   * max number of workers currently set to 2
-  * #### Note: You need to comment out the `projects` option in `playwright.test.confg` for this to work.
+  * *Note: You need to comment out the `projects` option in `playwright.test.confg` for this to work.*
 
 ### Step 3
 Remember to comment out `test.skip()` on certain tests if you want to see them run! :)
