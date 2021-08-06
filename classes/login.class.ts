@@ -1,4 +1,5 @@
-import type { Page, ViewportSize } from 'playwright';
+import type { Page } from 'playwright';
+import { ViewportSize } from '@playwright/test';
 import { Coordinates, WindowScale  } from '../support/types';
 import { CSS_SELECTORS, RESPONSE_URL, URL, TIMEOUT_MS, COORD_OFFSET, AUTOMATION_OBJS } from '../support/const_objects';
 import { isLowEndDevice, closeLowEndDevicePopup, getWinScale } from '../support/functions/functions_devices';
