@@ -1,5 +1,5 @@
-import { BrowserContextOptions } from '@playwright/test';
-import type { Page, ViewportSize } from 'playwright';
+import { BrowserContextOptions, ViewportSize } from '@playwright/test';
+import type { Page } from 'playwright';
 import { Coordinates, PlayingFrom } from '../support/types';
 import { Login } from './login.class';
 import { getObjPosition } from '../support/functions/functions_objects';
