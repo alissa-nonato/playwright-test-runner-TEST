@@ -2,7 +2,7 @@ import { expect, Page } from '@playwright/test';
 import { Coordinates, IsVisibleProperty, ObjProperty, PositionProperty } from "../types";
 import { TIMEOUT_MS } from "../const_objects";
 
-// looks for an object and asserts that it was found
+// looks for an object and asserts that it was found or returns a boolean
 async function findObj (
     page: Page,
     objProperty: ObjProperty,
