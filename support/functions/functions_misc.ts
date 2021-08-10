@@ -8,8 +8,11 @@ import { TIMEOUT_MS } from '../const_objects';
 // there will be a delay for each worker to minimize Error 36 in game when testing in parallel
 // workerIndex % workers ensures the timeout value repeats and never gets too large
 export async function setWorkerIndexTimeout(page: Page, workerInfo: TestInfo) {
+    // ensuring there's always a delay when workerIndex > the max workers
+    const offset = workerInfo.workerIndex % config.workers === 0 ? 1 : 0;
+
     workerInfo.workerIndex > config.workers
-    ? await page.waitForTimeout((workerInfo.workerIndex % config.workers) * TIMEOUT_MS.FIVE_SECS)
+    ? await page.waitForTimeout((workerInfo.workerIndex % config.workers + offset) * TIMEOUT_MS.FIVE_SECS)
     : await page.waitForTimeout(workerInfo.workerIndex * TIMEOUT_MS.FIVE_SECS);
 }
 
