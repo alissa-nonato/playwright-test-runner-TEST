@@ -1,5 +1,4 @@
-import { BrowserContextOptions, ViewportSize } from '@playwright/test';
-import type { Page } from 'playwright';
+import { BrowserContextOptions, ViewportSize, Page, TestInfo } from '@playwright/test';
 import { Coordinates, PlayingFrom } from '../support/types';
 import { Login } from './login.class';
 import { getObjPosition } from '../support/functions/functions_objects';
@@ -16,10 +15,11 @@ export class Shiverchill {
         user: string, 
         pass: string, 
         contextOptions: BrowserContextOptions, 
-        viewport: ViewportSize
+        viewport: ViewportSize,
+        workerInfo: TestInfo
     ) {
         // initialize login object 
-        this.login = new Login(page, url, user, pass, contextOptions, viewport);
+        this.login = new Login(page, url, user, pass, contextOptions, viewport, workerInfo);
     }
 
     async goToShiverchill (playingFrom: PlayingFrom) {

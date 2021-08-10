@@ -8,14 +8,13 @@
     "iphone6": "playwright test --project='iphone 6'",
     "chromium": "playwright test --project=chromium",
     "webkit": "playwright test --project=webkit",
-    "pixel4":"playwright test --project='pixel 4'",
+    "pixel4": "playwright test --project='pixel 4'",
     "allbrowsers": "playwright test --browser=all"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.13.1",
-    "playwright": "^1.13.1"
+    "@playwright/test": "^1.13.1"
   }
 }

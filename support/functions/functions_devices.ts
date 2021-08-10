@@ -1,5 +1,4 @@
-import { BrowserContextOptions, Page, ViewportSize } from '@playwright/test';
-import { devices } from 'playwright';
+import { BrowserContextOptions, ViewportSize, Page, devices } from '@playwright/test';
 import { Coordinates, WindowScale } from "../types";
 import { TIMEOUT_MS, DEFAULT_VIEWPORT, LOW_END_USER_AGENTS, COORD_OFFSET, AUTOMATION_OBJS } from "../const_objects";
 import { getObjPosition } from './functions_objects';
@@ -50,13 +49,11 @@ export async function isLowEndDevice (
 
 export async function closeLowEndDevicePopup (
     page: Page, 
-    contextOptions: BrowserContextOptions
+    scale: WindowScale
 ): Promise<void> {
-    const scale = await getWinScale(undefined, contextOptions);
-
-    const result: Coordinates = await getObjPosition(page, 'name', AUTOMATION_OBJS.LOW_END_OKAY_BTN,'worldPosition', TIMEOUT_MS.ONE_SEC);
-        await page.mouse.click(
-            ((result.x * scale.scaleX) + COORD_OFFSET), 
-            ((result.y * scale.scaleY) + COORD_OFFSET)
-        );
-  }
+    const result: Coordinates = await getObjPosition(page, 'name', AUTOMATION_OBJS.LOW_END_OKAY_BTN, 'worldPosition', TIMEOUT_MS.ONE_SEC);
+    await page.mouse.click(
+        result.x * scale.scaleX + COORD_OFFSET, 
+        result.y * scale.scaleY + COORD_OFFSET
+    );
+}

@@ -1,4 +1,4 @@
-import { test, expect, describe } from '../fixtures/login.fixture';
+import { test, expect, test_suite } from '../fixtures/login.fixture';
 import { getObjProperty } from '../support/functions/functions_objects';
 import { URL, AUTOMATION_OBJS } from '../support/const_objects';
 import { Login } from '../classes/login.class';
@@ -6,13 +6,12 @@ import { Login } from '../classes/login.class';
 // Use fixture
 test.use({baseURL: URL.PRODIGY_FEATURE_BRANCH});
 
-test.describe('Log in from home', () => {
+test_suite('Logging In', () => {
     test.skip();
-    test('should log in', async ({page, baseURL, user, pass, contextOptions, viewport}) => {
+    test('should log in', async ({page, baseURL, user, pass, contextOptions, viewport}, workerInfo) => {
         //test.skip();
         test.slow();
-        
-        const login = new Login(page, baseURL, user, pass, contextOptions, viewport);
+        const login = new Login(page, baseURL, user, pass, contextOptions, viewport, workerInfo);
         await login.initialLogin();
         
         const screen: string = await getObjProperty(page, 'key', AUTOMATION_OBJS.CHAR_SEL_SCREEN);
@@ -20,11 +19,11 @@ test.describe('Log in from home', () => {
     });
 
 
-    test('should enter the game from home', async ({page, contextOptions, baseURL, user, pass, viewport}) => {
+    test('should enter the game from home', async ({page, contextOptions, baseURL, user, pass, viewport}, workerInfo) => {
         //test.skip();
         test.slow();
 
-        const login = new Login(page, baseURL, user, pass, contextOptions, viewport);
+        const login = new Login(page, baseURL, user, pass, contextOptions, viewport, workerInfo);
         await login.initialLogin();
         
         await login.playFromHome();
@@ -33,11 +32,11 @@ test.describe('Log in from home', () => {
         expect(worldMapBtn).toStrictEqual(AUTOMATION_OBJS.WORLD_MAP_BTN);
     });
 
-    test('should enter the game from school', async ({page, contextOptions, baseURL, user, pass, viewport}) => {
+    test('should enter the game from school', async ({page, contextOptions, baseURL, user, pass, viewport}, workerInfo) => {
         //test.skip();
         test.slow();
 
-        const login = new Login(page, baseURL, user, pass, contextOptions, viewport);
+        const login = new Login(page, baseURL, user, pass, contextOptions, viewport, workerInfo);
         await login.initialLogin();
         
         await login.playFromSchool();

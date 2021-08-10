@@ -1,5 +1,5 @@
-import { PlaywrightTestConfig } from '@playwright/test';
-import { devices } from 'playwright';
+import { PlaywrightTestConfig, devices } from '@playwright/test';
+// import { devices } from 'playwright';
 
 const config: PlaywrightTestConfig = {
     testDir: 'tests',                       // Look for test files in the "tests" directory, relative to this configuration file
@@ -7,10 +7,10 @@ const config: PlaywrightTestConfig = {
     timeout: 20000,                         // Each test is given 20 seconds  
     forbidOnly: !!process.env.CI,           // Forbid test.only on CI  
     retries: 2,                             // 2 retries for each test
-    workers: 2,                             // Limit the number of workers (browsers/projects) that run at a time
+    workers: 3,                             // Limit the number of workers (browsers/projects) that run at a time
     updateSnapshots: 'missing',             // For visual comparisons: whether to update expected snapshots with the actual results produced by the test run
     expect: {
-        toMatchSnapshot: { threshold: 1 },  // Matching threshold, ranges from 0 to 1. Smaller values make the comparison more sensitive.
+        toMatchSnapshot: { threshold: 0.99 },  // Matching threshold, ranges from 0 to 1. Smaller values make the comparison more sensitive.
     },
     use: {
         headless: false,

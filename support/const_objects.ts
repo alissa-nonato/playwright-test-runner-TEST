@@ -1,4 +1,4 @@
-import { devices } from 'playwright';
+import { devices } from '@playwright/test';
 
 // Define response url (regex) object to wait for when moving to next screen
 export const RESPONSE_URL = {
@@ -20,6 +20,8 @@ export const RESPONSE_URL = {
     ONE_SEC: 1000,
     TWO_SECS: 2000,
     THREE_SECS: 3000,
+    FOUR_SECS: 4000,
+    FIVE_SECS: 5000,
     ONE_MIN: 60000,
     TWO_MIN: 120000,
     THREE_MIN: 180000
@@ -27,13 +29,14 @@ export const RESPONSE_URL = {
   
   // Define URL object for the Prodigy URLs locally
   export const URL = {
+    PRODIGY_LOCAL_STAGING: 'http://localhost:32220/?env=staging',
     PRODIGY_FEATURE_BRANCH: 'https://alissa-qa.prodigygame.org/Play/',
     PRODIGY_STAGING: 'https://play.prodigygame.org/',
     PRODIGY_INTERNAL_PROD: 'https://internal-play.prodigygame.com/',
     PRODIGY_PROD: 'https://play.prodigygame.com/'
   };
   
-  export const COORD_OFFSET = 5;
+  export const COORD_OFFSET = 10;
   
   export const AUTOMATION_OBJS = {
     CHAR_SEL_SCREEN: 'CharSelect',

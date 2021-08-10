@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { Coordinates, IsVisibleProperty, ObjProperty, PositionProperty } from "../types";
 import { TIMEOUT_MS } from "../const_objects";
 

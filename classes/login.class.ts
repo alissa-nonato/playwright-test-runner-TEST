@@ -1,11 +1,11 @@
-import type { Page } from 'playwright';
-import { ViewportSize } from '@playwright/test';
+import { ViewportSize, Page, TestInfo } from '@playwright/test';
 import { Coordinates, WindowScale  } from '../support/types';
 import { CSS_SELECTORS, RESPONSE_URL, URL, TIMEOUT_MS, COORD_OFFSET, AUTOMATION_OBJS } from '../support/const_objects';
 import { isLowEndDevice, closeLowEndDevicePopup, getWinScale } from '../support/functions/functions_devices';
 import { getObjPosition } from '../support/functions/functions_objects';
 import { BrowserContextOptions } from '@playwright/test';
 import { closeParentLinkPopupIfVisible } from '../support/functions/functions_popups';
+import { setWorkerIndexTimeout } from '../support/functions/functions_misc';
 
 export class Login {
     readonly page: Page;
@@ -14,6 +14,7 @@ export class Login {
     readonly pass: string;
     readonly contextOptions: BrowserContextOptions;
     readonly viewport: ViewportSize;
+    readonly workerInfo: TestInfo;
     public scale: WindowScale;
 
     constructor(
@@ -22,7 +23,8 @@ export class Login {
         user: string, 
         pass: string, 
         contextOptions: BrowserContextOptions, 
-        viewport: ViewportSize
+        viewport: ViewportSize,
+        workerInfo: TestInfo
     ) {
         this.page = page;
         this.url = url;
@@ -30,12 +32,13 @@ export class Login {
         this.pass = pass;
         this.contextOptions = contextOptions;
         this.viewport = viewport;
+        this.workerInfo = workerInfo;
     }
 
     async initialLogin() {
         this.scale = await getWinScale(this.viewport, this.contextOptions);
         
-        await this.page.goto(this.url);
+        await this.page.goto(this.url);   
         
         await Promise.all([
             this.page.waitForNavigation(),             // The promise resolves after navigation has finished
@@ -50,6 +53,9 @@ export class Login {
             this.url === URL.PRODIGY_FEATURE_BRANCH || this.url === URL.PRODIGY_STAGING
             ? RESPONSE_URL.HOME_SCHOOL_SCREEN : RESPONSE_URL.INITIAL_LOGIN_SCREEN;
 
+        // set workerIndex delay before clicking Login button
+        await setWorkerIndexTimeout(this.page, this.workerInfo);
+        
         await Promise.all([           
             this.page.waitForResponse(responseURL),                 // Waits for the next response with the specified url (RegEx)
             this.page.click(`span >> ${CSS_SELECTORS.LOGIN_BTN}`)   // Clicking button triggers the response
@@ -59,7 +65,7 @@ export class Login {
         
         // close popup if on older mobile device
         if (this.contextOptions.viewport !== undefined && await isLowEndDevice(this.contextOptions)) {
-            await closeLowEndDevicePopup(this.page, this.contextOptions);
+            await closeLowEndDevicePopup(this.page, this.scale);
         } 
     }
 
