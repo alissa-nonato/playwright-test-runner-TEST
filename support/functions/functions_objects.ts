@@ -58,7 +58,7 @@ export async function isObjVisible (
     if(objFound) {
         return await page.evaluate(
             `AUTOMATION.objects.find(
-                (o) => o.${objProperty} === '${objString}'
+                o => o.${objProperty} === '${objString}'
             ).${isVisibleProp}`
         );
     } else {
@@ -79,7 +79,7 @@ export async function getObjProperty (
     // will only get here if obj is found via findObj
     return await page.evaluate(
         `AUTOMATION.objects.find(
-            (o) => o.${objProperty} === '${objString}'
+            o => o.${objProperty} === '${objString}'
         ).${objProperty}`
     );
 }
@@ -99,7 +99,7 @@ export async function getObjPosition (
     if(objProperty !== 'frame') {
         return await page.evaluate(
             `AUTOMATION.objects.find(
-                (o) => o.${objProperty} === '${objString}'
+                o => o.${objProperty} === '${objString}'
             ).${positionProp}`
         );
     }
@@ -109,7 +109,7 @@ export async function getObjPosition (
 
     const vertexDataNum: number[] = await page.evaluate(
         `AUTOMATION.objects.find(
-            (o) => o.${objProperty} === '${objString}'
+            o => o.${objProperty} === '${objString}'
         ).${vertexDataStr}`
     );
 
