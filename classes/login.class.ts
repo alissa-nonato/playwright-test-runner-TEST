@@ -5,7 +5,6 @@ import { isLowEndDevice, closeLowEndDevicePopup, getWinScale } from '../support/
 import { getObjPosition } from '../support/functions/functions_objects';
 import { BrowserContextOptions } from '@playwright/test';
 import { closeParentLinkPopupIfVisible } from '../support/functions/functions_popups';
-import { setWorkerIndexTimeout } from '../support/functions/functions_misc';
 
 export class Login {
     readonly page: Page;
@@ -52,9 +51,6 @@ export class Login {
         const responseURL = 
             this.url === URL.PRODIGY_FEATURE_BRANCH || this.url === URL.PRODIGY_STAGING
             ? RESPONSE_URL.HOME_SCHOOL_SCREEN : RESPONSE_URL.INITIAL_LOGIN_SCREEN;
-
-        // set workerIndex delay before clicking Login button
-        await setWorkerIndexTimeout(this.page, this.workerInfo);
         
         await Promise.all([           
             this.page.waitForResponse(responseURL),                 // Waits for the next response with the specified url (RegEx)

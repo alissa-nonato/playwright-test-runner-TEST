@@ -1,7 +1,6 @@
 import { test, test_suite } from '../fixtures/login.fixture';
-import { URL, TIMEOUT_MS } from '../support/const_objects';
+import { URL } from '../support/const_objects';
 import { HudButtons } from '../classes/hud_buttons.class';
-import { Shiverchill} from '../classes/shiverchill.class';
 
 // Use fixture
 test.use({baseURL: URL.PRODIGY_FEATURE_BRANCH});
